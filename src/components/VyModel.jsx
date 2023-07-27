@@ -6,16 +6,16 @@ Command: npx gltfjsx@6.2.10 public/models/canh-model.glb
 import React, { useEffect, useRef } from "react";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 
-export default function CanhModel(props) {
+export default function VyModel(props) {
     const ref = useRef(null);
-    const { nodes, materials } = useGLTF("models/canh-model.glb");
-    const { animations: myAnimation } = useFBX("animations/flair.fbx");
-    myAnimation[0].name = "Canh";
+    const { nodes, materials } = useGLTF("models/vy-model.glb");
+    const { animations: myAnimation } = useFBX("animations/clap.fbx");
+    myAnimation[0].name = "Vy";
 
     const { actions } = useAnimations(myAnimation, ref);
 
     useEffect(() => {
-        actions["Canh"].reset().play();
+        actions["Vy"].reset().play();
     }, []);
 
     return (
@@ -34,7 +34,7 @@ export default function CanhModel(props) {
                 />
                 <skinnedMesh
                     geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
-                    material={materials.Wolf3D_Outfit_Footwear}
+                    material={materials["aleksandr@readyplayer"]}
                     skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
                 />
                 <skinnedMesh
@@ -46,6 +46,11 @@ export default function CanhModel(props) {
                     geometry={nodes.Wolf3D_Hair.geometry}
                     material={materials.Wolf3D_Hair}
                     skeleton={nodes.Wolf3D_Hair.skeleton}
+                />
+                <skinnedMesh
+                    geometry={nodes.Wolf3D_Glasses.geometry}
+                    material={materials.Wolf3D_Glasses}
+                    skeleton={nodes.Wolf3D_Glasses.skeleton}
                 />
                 <skinnedMesh
                     name="EyeLeft"
@@ -92,4 +97,4 @@ export default function CanhModel(props) {
     );
 }
 
-useGLTF.preload("/canh-model.glb");
+useGLTF.preload("/vy-model.glb");

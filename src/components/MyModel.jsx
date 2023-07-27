@@ -16,7 +16,7 @@ export default function MyModel(props) {
     // });
     const { nodes, materials } = useGLTF("models/my-model.glb");
 
-    const { animations: myAnimation } = useFBX("animations/thien-freeze.fbx");
+    const { animations: myAnimation } = useFBX("animations/freeze.fbx");
     myAnimation[0].name = "Thien";
 
     const { actions } = useAnimations(myAnimation, ref);
