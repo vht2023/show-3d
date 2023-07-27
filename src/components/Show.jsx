@@ -10,6 +10,7 @@ import CanhModel from "./CanhModel";
 import Computer from "./Computer";
 import VyModel from "./VyModel";
 import Micro from "./Micro";
+import Stage from "./Stage";
 
 export const Show = () => {
     const texture = useTexture("textures/bg1.jpg");
@@ -23,17 +24,17 @@ export const Show = () => {
 
     return (
         <>
-            <group position-y={1.2} position-x={0.5} position-z={-0.85}>
+            <group position-y={1.8} position-x={0.5} position-z={-0.85}>
                 <Html>
                     <h4 style={{ color: "#ab208e" }}>Bé Momo</h4>
                 </Html>
             </group>
-            <group position-y={1.2} position-x={2.5} position-z={2}>
+            <group position-y={1.8} position-x={2.5} position-z={2}>
                 <Html>
-                    <h4 style={{ color: "yellow" }}>BE</h4>
+                    <h4 style={{ color: "black" }}>BE</h4>
                 </Html>
             </group>
-            <group position-y={1.2} position-x={-3} position-z={1}>
+            <group position-y={2} position-x={-3.5} position-z={1}>
                 <Html>
                     <h4 style={{ color: "red" }}>Thiến Dùm</h4>
                 </Html>
@@ -45,7 +46,6 @@ export const Show = () => {
                     playing={show === "show" ? true : false}
                     loop
                 />
-                <h1>TEST</h1>
             </Html>
             <OrbitControls />
             <Sky />
@@ -68,14 +68,17 @@ export const Show = () => {
             <group position-y={-1} position-x={5} position-z={1}>
                 <Lamborghini />
             </group>
-            <mesh scale={[18.2, 0.5, 7]} position-y={-1.25} position-z={1}>
+            {/* <mesh scale={[18.2, 0.5, 7]} position-y={-1.25} position-z={1}>
                 <boxGeometry />
                 <meshStandardMaterial color="white" />
             </mesh>
             <mesh position-z={-2.5} position-y={3}>
                 <planeGeometry args={[viewport.width, viewport.height]} />
                 <meshBasicMaterial map={texture} />
-            </mesh>
+            </mesh> */}
+            <group scale={[1, 1, 1]} position-x={0} position-y={-2.7} position-z={6}>
+                <Stage />
+            </group>
             <ambientLight intensity={1} />
         </>
     );
