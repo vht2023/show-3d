@@ -9,17 +9,25 @@ import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 export default function VyModel(props) {
     const ref = useRef(null);
     const { nodes, materials } = useGLTF("models/vy-model.glb");
-    const { animations: myAnimation } = useFBX("animations/clap.fbx");
-    myAnimation[0].name = "Vy";
 
-    const { actions } = useAnimations(myAnimation, ref);
+    const { animations: waitAnimation } = useFBX("animations/typing.fbx");
+    const { animations: showAnimation } = useFBX("animations/cheering.fbx");
+
+    waitAnimation[0].name = "wait";
+    showAnimation[0].name = "show";
+
+    const { actions } = useAnimations(
+        [showAnimation[0], waitAnimation[0]],
+        ref
+    );
 
     useEffect(() => {
-        actions["Vy"].reset().play();
-    }, []);
+        actions[props.show].reset().play();
+        return () => actions[props.show].reset().stop();
+    }, [props.show]);
 
     return (
-        <group {...props} dispose={null} ref={ref}>
+        <group {...props} dispose={null} ref={ref} position-z={props.show === "show" ? 0.55 : 0}>
             <group rotation-x={-Math.PI / 2}>
                 <primitive object={nodes.Hips} />
                 <skinnedMesh

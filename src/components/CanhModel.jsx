@@ -9,14 +9,22 @@ import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
 export default function CanhModel(props) {
     const ref = useRef(null);
     const { nodes, materials } = useGLTF("models/canh-model.glb");
-    const { animations: myAnimation } = useFBX("animations/flair.fbx");
-    myAnimation[0].name = "Canh";
 
-    const { actions } = useAnimations(myAnimation, ref);
+    const { animations: waitAnimation } = useFBX("animations/standing.fbx");
+    const { animations: showAnimation } = useFBX("animations/flair.fbx");
+
+    waitAnimation[0].name = "wait";
+    showAnimation[0].name = "show";
+
+    const { actions } = useAnimations(
+        [showAnimation[0], waitAnimation[0]],
+        ref
+    );
 
     useEffect(() => {
-        actions["Canh"].reset().play();
-    }, []);
+        actions[props.show].reset().play();
+        return () => actions[props.show].reset().stop();
+    }, [props.show]);
 
     return (
         <group {...props} dispose={null} ref={ref}>
